@@ -20,13 +20,13 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: ^20.11.6
+    specifier: 20.11.6
     version: 20.11.6
   '@types/ws':
-    specifier: ^8.5.10
+    specifier: 8.5.10
     version: 8.5.10
   typescript:
-    specifier: ^5.3.3
+    specifier: 5.3.3
     version: 5.3.3
 
 packages:
