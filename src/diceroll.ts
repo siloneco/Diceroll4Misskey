@@ -15,8 +15,10 @@ export const parseDiceText = (text: string): Roll[] => {
 
   const results: Roll[] = []
 
-  for (const line of lines) {
-    const split = line.trim().split('d')
+  const tokens = lines.flatMap((line) => line.split(' '))
+
+  for (const token of tokens) {
+    const split = token.trim().split('d')
 
     if (split.length !== 2) {
       continue
