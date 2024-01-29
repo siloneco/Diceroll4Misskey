@@ -21,7 +21,12 @@
       "automerge": true
     },
     {
-      "matchPackageNames": ["gcr.io/distroless/nodejs20-debian12"],
+      "matchPackageNames": [
+        "actions/checkout",
+        "pnpm/action-setup",
+        "actions/setup-node",
+        "gcr.io/distroless/nodejs20-debian12"
+      ],
       "pinDigests": false
     }
   ]
