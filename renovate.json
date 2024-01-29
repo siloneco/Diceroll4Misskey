@@ -19,6 +19,10 @@
       "matchUpdateTypes": ["minor", "patch"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
+    },
+    {
+      "matchPackageNames": ["gcr.io/distroless/nodejs20-debian12"],
+      "pinDigests": false
     }
   ]
 }
