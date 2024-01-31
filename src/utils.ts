@@ -1,10 +1,12 @@
 type Visibility = 'public' | 'home' | 'followers'
 
 export const selectVisibility = (received: string): Visibility | undefined => {
-  if (received === 'public' || received === 'home') {
+  if (
+    received === 'public' ||
+    received === 'home' ||
+    received === 'followers'
+  ) {
     return 'home'
-  } else if (received === 'followers') {
-    return 'followers'
   } else {
     return undefined
   }
