@@ -124,7 +124,7 @@ mainChannel.on('mention', async (data) => {
         if (result.error instanceof InvalidCommandError) {
           cli.request('notes/create', {
             replyId: data.id,
-            text: `result.error.message <small>(${token})</small>`,
+            text: `${result.error.message} <small>(${token.value})</small>`,
             visibility,
           })
         } else {
