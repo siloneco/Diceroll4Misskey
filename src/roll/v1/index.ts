@@ -72,9 +72,12 @@ const perform = (token: DiceRollToken): DiceRollResult | null => {
 
   const sumResult = calcSum(tmpTokenStr)
 
+  const hasOperator =
+    tmpTokenStr.indexOf('+') !== -1 || tmpTokenStr.indexOf('-') !== -1
+
   return {
     number: sumResult,
-    detail: tmpTokenStr,
+    detail: hasOperator ? tmpTokenStr : undefined,
   }
 }
 
