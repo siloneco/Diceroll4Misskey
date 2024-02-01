@@ -1,3 +1,6 @@
+import { Result } from '../utils/Result.js'
+import { InvalidCommandError } from './error.js'
+
 export type DiceRollToken = {
   value: string
 }
@@ -9,5 +12,7 @@ export type DiceRollResult = {
 
 export interface DiceRollKit {
   parse: (text: string) => DiceRollToken[]
-  perform: (token: DiceRollToken) => DiceRollResult | null
+  perform: (
+    token: DiceRollToken
+  ) => Result<DiceRollResult, InvalidCommandError | Error>
 }

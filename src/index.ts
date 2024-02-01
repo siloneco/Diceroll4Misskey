@@ -12,6 +12,7 @@ import {
 } from './config.js'
 import { DiceRollToken } from './roll/interface.js'
 import { getDiceRollKit } from './roll/v1/index.js'
+import { InvalidCommandError } from './roll/error.js'
 
 const SERVER_URL = getServerUrl()
 const TOKEN = getToken()
@@ -130,13 +131,22 @@ mainChannel.on('mention', async (data) => {
     for (const token of tokens) {
       const result = rollKit.perform(token)
 
-      if (result === null) {
-        continue
+      if (result.isFailure()) {
+        if (result.error instanceof InvalidCommandError) {
+          cli.request('notes/create', {
+            replyId: data.id,
+            text: result.error.message,
+            visibility,
+          })
+        } else {
+          console.error(result.error)
+        }
+        return
       }
 
-      resultText += result.number
-      if (result.detail !== undefined) {
-        resultText += ` <small>(${result.detail})</small>`
+      resultText += result.value.number
+      if (result.value.detail !== undefined) {
+        resultText += ` <small>(${result.value.detail})</small>`
       }
 
       resultText += '\n'

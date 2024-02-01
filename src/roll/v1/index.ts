@@ -1,4 +1,11 @@
+import {
+  getMaxAmountOfCommandsPerRequest,
+  getMaxAmountOfThrowsPerCommand,
+  getMaxDiceNumber,
+} from '../../config.js'
 import { random } from '../../random/random.js'
+import { Failure, Result, Success } from '../../utils/Result.js'
+import { InvalidCommandError } from '../error.js'
 import { DiceRollKit, DiceRollResult, DiceRollToken } from '../interface.js'
 
 const validTokenRegex =
@@ -49,7 +56,35 @@ const calcSum = (str: string): number => {
   return values.reduce((a, b) => a + b)
 }
 
-const perform = (token: DiceRollToken): DiceRollResult | null => {
+const rollDice = ({
+  count,
+  face,
+}: {
+  count: number
+  face: number
+}): number | string => {
+  if (count <= 0 || face <= 0) {
+    return 'マイナスは指定できません！'
+  }
+  if (count > getMaxAmountOfThrowsPerCommand()) {
+    return `${count}個も振れません！${getMaxAmountOfThrowsPerCommand()}個までにしてください！`
+  }
+  if (face > getMaxDiceNumber()) {
+    return `${face}面ダイスはデカすぎます！${getMaxDiceNumber()}面ダイスまでにしてください！`
+  }
+
+  let total = 0
+  for (let i = 0; i < count; i++) {
+    const rollResult = Math.floor(random() * face) + 1
+    total += rollResult
+  }
+
+  return total
+}
+
+const perform = (
+  token: DiceRollToken
+): Result<DiceRollResult, InvalidCommandError | Error> => {
   let tmpTokenStr: string = token.value
   let result: RegExpExecArray | null = null
 
@@ -61,13 +96,13 @@ const perform = (token: DiceRollToken): DiceRollResult | null => {
     const face = parseInt(split[1])
     const count = parseInt(split[0])
 
-    let total = 0
-    for (let i = 0; i < count; i++) {
-      const rollResult = Math.floor(random() * face) + 1
-      total += rollResult
+    const rollResult = rollDice({ face, count })
+
+    if (typeof rollResult === 'string') {
+      return new Failure(new InvalidCommandError(rollResult))
     }
 
-    tmpTokenStr = tmpTokenStr.replace(diceStr, total.toString())
+    tmpTokenStr = tmpTokenStr.replace(diceStr, rollResult.toString())
   }
 
   const sumResult = calcSum(tmpTokenStr)
@@ -75,10 +110,10 @@ const perform = (token: DiceRollToken): DiceRollResult | null => {
   const hasOperator =
     tmpTokenStr.indexOf('+') !== -1 || tmpTokenStr.indexOf('-') !== -1
 
-  return {
+  return new Success({
     number: sumResult,
     detail: hasOperator ? tmpTokenStr : undefined,
-  }
+  })
 }
 
 export const getDiceRollKit = (): DiceRollKit => {
