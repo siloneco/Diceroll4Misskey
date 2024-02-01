@@ -32,17 +32,49 @@ if (isDebugging) {
   )
 }
 
-const stream = new Misskey.Stream(SERVER_URL, { token: TOKEN }, { WebSocket })
 const cli = new Misskey.api.APIClient({
   origin: SERVER_URL,
   credential: TOKEN,
 })
 
-const serverInfo = await cli.request('meta', { detail: true })
-const userInfo = await cli.request('i', { detail: true })
+let hostname: string = ''
+let username: string = ''
 
-const hostname = new URL(serverInfo.uri).hostname
-const username = userInfo.username
+let retryCount = 0
+while (hostname === '' || username === '') {
+  try {
+    const serverInfo = await cli.request('meta', { detail: true })
+    hostname = new URL(serverInfo.uri).hostname
+
+    const userInfo = await cli.request('i', { detail: true })
+    username = userInfo.username
+  } catch (e: any) {
+    const code: string | undefined = e.code
+
+    if (code === 'AUTHENTICATION_FAILED') {
+      console.error('Authentication failed')
+      process.exit(1)
+    }
+
+    console.error(e)
+  } finally {
+    // break if both variables successfully fetched
+    if (hostname !== '' && username !== '') {
+      break
+    }
+
+    if (retryCount >= 10) {
+      console.error('Failed to connect to server.')
+      process.exit(1)
+    }
+
+    retryCount += 1
+    console.log(`Retrying(${retryCount}) in 10 second...`)
+    await new Promise((resolve) => setTimeout(resolve, 10000))
+  }
+}
+
+const stream = new Misskey.Stream(SERVER_URL, { token: TOKEN }, { WebSocket })
 
 console.log(`Logged in as ${username}@${hostname}`)
 
