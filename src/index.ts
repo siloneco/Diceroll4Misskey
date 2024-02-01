@@ -135,7 +135,12 @@ mainChannel.on('mention', async (data) => {
 
       resultText += result.value.number
       if (result.value.detail !== undefined) {
-        resultText += ` <small>(${result.value.detail})</small>`
+        const detail = result.value.detail
+        if (detail.length < 15) {
+          resultText += ` <small>(${result.value.detail})</small>`
+        } else {
+          resultText += ` <small>(式省略)</small>`
+        }
       }
 
       resultText += '\n'

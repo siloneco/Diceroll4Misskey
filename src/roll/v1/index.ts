@@ -9,7 +9,7 @@ import { InvalidCommandError } from '../error.js'
 import { DiceRollKit, DiceRollResult, DiceRollToken } from '../interface.js'
 
 const validTokenRegex =
-  /^(?:\d{1,10})?(?:(?:[+-]?\d{1,10}[+-]){0,10}?\d{1,10}d\d{1,10})+(?:[+-]\d{1,10}){0,10}$/
+  /^(?:\d{1,10})?(?:(?:[+-]?\d{1,10}[+-]){0,10}?\d{1,10}d\d{1,10}){1,10}(?:[+-]\d{1,10}){0,10}$/
 
 const parse = (text: string): DiceRollToken[] => {
   const result: DiceRollToken[] = []
@@ -33,7 +33,6 @@ const parse = (text: string): DiceRollToken[] => {
 }
 
 const diceRegex = /[+-]?(\d+d\d+)[+-]?/
-const numberRegex = /([+-]?\d+)/
 
 const calcSum = (str: string): number => {
   const tokens = str.split('+')
@@ -85,6 +84,14 @@ const rollDice = ({
 const perform = (
   token: DiceRollToken
 ): Result<DiceRollResult, InvalidCommandError | Error> => {
+  if (token.value.length > 50) {
+    return new Failure(
+      new InvalidCommandError(
+        'コマンドが長すぎます！50文字以内にしてください！'
+      )
+    )
+  }
+
   let tmpTokenStr: string = token.value
   let result: RegExpExecArray | null = null
 
