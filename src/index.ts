@@ -1,15 +1,17 @@
 import WebSocket from 'ws'
 import * as Misskey from 'misskey-js'
-import { parseDiceText, roll, validateRolls } from './diceroll.js'
 import { createResultText, selectVisibility } from './utils.js'
 import { consumeToken } from './rateLimit.js'
 import {
   getDebugUserId,
+  getMaxAmountOfCommandsPerRequest,
   getMaxAmountOfThrowsPerCommand,
   getServerUrl,
   getToken,
   isDebugMode,
 } from './config.js'
+import { DiceRollToken } from './roll/interface.js'
+import { getDiceRollKit } from './roll/v1/index.js'
 
 const SERVER_URL = getServerUrl()
 const TOKEN = getToken()
@@ -70,8 +72,9 @@ mainChannel.on('mention', async (data) => {
       return
     }
 
-    const rolls = parseDiceText(text)
-    if (rolls.length <= 0) {
+    const rollKit = getDiceRollKit()
+    const tokens: DiceRollToken[] = rollKit.parse(text)
+    if (tokens.length <= 0) {
       return
     }
 
@@ -99,23 +102,49 @@ mainChannel.on('mention', async (data) => {
       return
     }
 
-    const validateResult = validateRolls(rolls)
-
-    if (!validateResult.valid) {
+    if (tokens.length > getMaxAmountOfCommandsPerRequest()) {
       cli.request('notes/create', {
         replyId: data.id,
-        text: validateResult.reason,
+        text: `一度に${getMaxAmountOfCommandsPerRequest()}個以上のコマンドを実行することはできません！`,
         visibility,
       })
       return
     }
 
+    // const validateResult = validateRolls(rolls)
+
+    // if (!validateResult.valid) {
+    //   cli.request('notes/create', {
+    //     replyId: data.id,
+    //     text: validateResult.reason,
+    //     visibility,
+    //   })
+    //   return
+    // }
+
     if (isDebugging) {
-      console.log(rolls)
+      console.log(JSON.stringify(tokens))
     }
 
-    const result = roll(rolls)
-    const resultText = createResultText(result)
+    let resultText = ''
+    for (const token of tokens) {
+      const result = rollKit.perform(token)
+
+      if (result === null) {
+        continue
+      }
+
+      resultText += result.number
+      if (result.detail !== undefined) {
+        resultText += ` <small>(${result.detail})</small>`
+      }
+
+      resultText += '\n'
+    }
+
+    if (resultText.length <= 0) {
+      return
+    }
 
     const cw: string | undefined =
       resultText.length > 100 ? 'ながい' : undefined

@@ -35,3 +35,29 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm run type-check
+
+  jest-test:
+    if: ${{ github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name }}
+    name: Jest
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - run: node --version
+      - run: pnpm --version
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run test
