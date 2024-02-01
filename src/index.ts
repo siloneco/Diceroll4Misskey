@@ -112,17 +112,6 @@ mainChannel.on('mention', async (data) => {
       return
     }
 
-    // const validateResult = validateRolls(rolls)
-
-    // if (!validateResult.valid) {
-    //   cli.request('notes/create', {
-    //     replyId: data.id,
-    //     text: validateResult.reason,
-    //     visibility,
-    //   })
-    //   return
-    // }
-
     if (isDebugging) {
       console.log(JSON.stringify(tokens))
     }
@@ -135,7 +124,7 @@ mainChannel.on('mention', async (data) => {
         if (result.error instanceof InvalidCommandError) {
           cli.request('notes/create', {
             replyId: data.id,
-            text: result.error.message,
+            text: `result.error.message <small>(${token})</small>`,
             visibility,
           })
         } else {
