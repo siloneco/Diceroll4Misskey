@@ -24,8 +24,10 @@ describe('roll/v1 perform', () => {
 
     for (const [input, expected] of expectedResults) {
       const result = roller.perform({ value: input })
-      expect(result).not.toBeNull()
-      expect(result!.number).toBe(expected)
+      expect(result.isSuccess()).toBe(true)
+      if (result.isSuccess()) {
+        expect(result.value.number).toBe(expected)
+      }
     }
   })
 
