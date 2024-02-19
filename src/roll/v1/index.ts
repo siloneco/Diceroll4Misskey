@@ -63,7 +63,7 @@ const rollDice = ({
   face: number
 }): number | string => {
   if (count <= 0 || face <= 0) {
-    return 'マイナスは指定できません！'
+    return '0以下は指定できません！'
   }
   if (count > getMaxAmountOfThrowsPerCommand()) {
     return `${count}個も振れません！${getMaxAmountOfThrowsPerCommand()}個までにしてください！`
