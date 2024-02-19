@@ -5,7 +5,7 @@ describe('random function works fine', () => {
     const AMOUNT = 10000
     const VALID_RATIO = 0.15
 
-    const results = []
+    const results: number[] = []
 
     for (let i = 0; i < 10; i++) {
       results.push(0)
