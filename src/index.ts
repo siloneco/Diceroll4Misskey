@@ -12,7 +12,6 @@ import {
 import { DiceRollToken } from './roll/interface.js'
 import { getDiceRollKit } from './roll/v1/index.js'
 import { InvalidCommandError } from './roll/error.js'
-import express from 'express'
 
 const SERVER_URL = getServerUrl()
 const TOKEN = getToken()
@@ -194,33 +193,4 @@ mainChannel.on('mention', async (data) => {
   } catch (e) {
     console.error(e)
   }
-})
-
-const healthCheckApp = express()
-healthCheckApp.set('etag', false)
-
-healthCheckApp.get('/healthz', async (_, res) => {
-  try {
-    await new Promise(function (resolve, reject) {
-      new Promise(() => {
-        stream.ping()
-        resolve('OK')
-      })
-
-      setTimeout(function () {
-        reject('timeout')
-      }, 3000)
-    })
-
-    res.status(200).send('Healthy.')
-  } catch (e: any) {
-    res.status(500).send('Not Healthy.')
-  }
-})
-
-healthCheckApp.listen(3000, () => {
-  console.log(
-    'Health check endpoint is listening on port 3000. \n' +
-      'See: http://localhost:3000/healthz'
-  )
 })
