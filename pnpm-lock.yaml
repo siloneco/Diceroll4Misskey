@@ -12,8 +12,8 @@ dependencies:
     specifier: ^2.1.0
     version: 2.1.0
   misskey-js:
-    specifier: 2024.3.0
-    version: 2024.3.0
+    specifier: 2024.3.1
+    version: 2024.3.1
   ws:
     specifier: ^8.16.0
     version: 8.16.0
@@ -2435,8 +2435,8 @@ packages:
       brace-expansion: 1.1.11
     dev: true
 
-  /misskey-js@2024.3.0:
-    resolution: {integrity: sha512-WJXmC31ktpZ43X+kL4yxgVfziGRC3J08Jrl42YyELClB0ZvEc9tCa/hepJ5+t3qYVp/t0xnW1E7Qp4mDNt9hUg==}
+  /misskey-js@2024.3.1:
+    resolution: {integrity: sha512-ksoCUCTbNMex/ZHxRm+WxsXsIS1/hphJnuoJasFnISkwTDylOoHvZ9qJg0e0WhAdKtuXXCUemvOI6CFOMfJDWQ==}
     dependencies:
       '@swc/cli': 0.1.63(@swc/core@1.3.105)
       '@swc/core': 1.3.105
