@@ -12,8 +12,8 @@ dependencies:
     specifier: ^2.1.0
     version: 2.1.0
   misskey-js:
-    specifier: 2024.5.0
-    version: 2024.5.0
+    specifier: 2024.7.0
+    version: 2024.7.0
   ws:
     specifier: ^8.16.0
     version: 8.18.0
@@ -1965,8 +1965,8 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /misskey-js@2024.5.0:
-    resolution: {integrity: sha512-Bm5tAGIKsPzIH51MCBMbmtggxC/BsIBLv2vYAfQV0LQd9/UEu5ujOsH5p7U+UN5toCTwj50uYxa5Zj9mTbV9eg==}
+  /misskey-js@2024.7.0:
+    resolution: {integrity: sha512-VtsDTJHt0l4ATT8rRF7Ufzi/r3FrTYa4mOzuC1K5L2PWh2/dlhjLiMqlKWwNDGViD1iSfJDGpZxmExX+7R3Jww==}
     dependencies:
       eventemitter3: 5.0.1
       reconnecting-websocket: 4.4.0
