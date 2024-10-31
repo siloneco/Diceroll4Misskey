@@ -1,4 +1,3 @@
-import WebSocket from 'ws'
 import * as Misskey from 'misskey-js'
 import { selectVisibility } from './utils.js'
 import { consumeToken } from './rateLimit.js'
@@ -73,7 +72,7 @@ while (hostname === '' || username === '') {
   }
 }
 
-const stream = new Misskey.Stream(SERVER_URL, { token: TOKEN }, { WebSocket })
+const stream = new Misskey.Stream(SERVER_URL, { token: TOKEN })
 
 console.log(`Logged in as ${username}@${hostname}`)
 
