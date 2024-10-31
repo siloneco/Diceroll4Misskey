@@ -18,7 +18,7 @@ RUN pnpm run build
 
 
 # Create runner image
-FROM gcr.io/distroless/nodejs20-debian12:nonroot AS runner
+FROM gcr.io/distroless/nodejs22-debian12:nonroot AS runner
 
 WORKDIR /app
 
