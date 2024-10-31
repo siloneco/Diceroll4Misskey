@@ -12,8 +12,8 @@ dependencies:
     specifier: ^2.1.0
     version: 2.1.0
   misskey-js:
-    specifier: 2024.5.0
-    version: 2024.5.0
+    specifier: 2024.10.1
+    version: 2024.10.1
   ws:
     specifier: ^8.16.0
     version: 8.18.0
@@ -638,6 +638,10 @@ packages:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
     dev: true
+
+  /@simplewebauthn/types@10.0.0:
+    resolution: {integrity: sha512-SFXke7xkgPRowY2E+8djKbdEznTVnD5R6GO7GPTthpHrokLvNKw8C3lFZypTxLI7KkCfGPfhtqB3d7OVGGa9jQ==}
+    dev: false
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
@@ -1942,9 +1946,10 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /misskey-js@2024.5.0:
-    resolution: {integrity: sha512-Bm5tAGIKsPzIH51MCBMbmtggxC/BsIBLv2vYAfQV0LQd9/UEu5ujOsH5p7U+UN5toCTwj50uYxa5Zj9mTbV9eg==}
+  /misskey-js@2024.10.1:
+    resolution: {integrity: sha512-Ibm9p2DoK7oPOpukwa0841onYI7AiA2GPc2AjRSB3n/iuw8yUSnBJVa0bapj2H6idegPa6wDL53VW1x4Ih+bwg==}
     dependencies:
+      '@simplewebauthn/types': 10.0.0
       eventemitter3: 5.0.1
       reconnecting-websocket: 4.4.0
     dev: false
