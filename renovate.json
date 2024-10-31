@@ -25,7 +25,7 @@
         "actions/checkout",
         "pnpm/action-setup",
         "actions/setup-node",
-        "gcr.io/distroless/nodejs20-debian12",
+        "gcr.io/distroless/nodejs22-debian12",
         "node"
       ],
       "pinDigests": false
