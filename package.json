@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "dotenv": "^16.4.1",
-    "limiter": "^2.1.0",
+    "limiter": "^3.0.0",
     "misskey-js": "2025.2.0"
   },
   "devDependencies": {
