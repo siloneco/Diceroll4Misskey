@@ -15,8 +15,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       misskey-js:
-        specifier: 2025.2.1
-        version: 2025.2.1
+        specifier: 2025.3.0
+        version: 2025.3.0
     devDependencies:
       '@types/jest':
         specifier: 29.5.14
@@ -948,8 +948,8 @@ packages:
     resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
     engines: {node: '>=10'}
 
-  misskey-js@2025.2.1:
-    resolution: {integrity: sha512-8A2sfEtkMG/BuWB7UEt1/+R9oSm75dDb31B+xXydn5m9V04BlT56lZCb+cCz4korofbthCaqDyoKfa1oEAI2hA==}
+  misskey-js@2025.3.0:
+    resolution: {integrity: sha512-+nDoAn02Zl1/Bm6a4uktM83mnwjBTkCYheDkVlRzveBmsbWXH2diZ4Sl4TfYktq5ImGhBQS1CbtKHWALs10xXA==}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -2469,7 +2469,7 @@ snapshots:
     dependencies:
       brace-expansion: 2.0.1
 
-  misskey-js@2025.2.1:
+  misskey-js@2025.3.0:
     dependencies:
       '@simplewebauthn/types': 12.0.0
       eventemitter3: 5.0.1
