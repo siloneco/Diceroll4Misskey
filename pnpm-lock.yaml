@@ -15,8 +15,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       misskey-js:
-        specifier: 2025.10.2
-        version: 2025.10.2
+        specifier: 2025.11.0
+        version: 2025.11.0
     devDependencies:
       '@types/jest':
         specifier: 29.5.14
@@ -932,8 +932,8 @@ packages:
   minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
-  misskey-js@2025.10.2:
-    resolution: {integrity: sha512-OsrFBzd+RF6u2tUdXDu4ux/xv4WuckrucEtH21PBFk6J0a9O1oG7KMQ5zwUzjD7lkWsB1/Cc6/wY1C5qcQtu6w==}
+  misskey-js@2025.11.0:
+    resolution: {integrity: sha512-lxeWv77/8czn+XDyplpeFOepvkfMbX4/zJzfzqaVmesnzWpVeWolsIFwMxMTPKz5dBAQQ7Iub1P/h0DMV4yICw==}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -2457,7 +2457,7 @@ snapshots:
 
   minimist@1.2.8: {}
 
-  misskey-js@2025.10.2:
+  misskey-js@2025.11.0:
     dependencies:
       '@simplewebauthn/types': 12.0.0
       eventemitter3: 5.0.1
