@@ -19,20 +19,14 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v6
         with:
-          version: 9
-          run_install: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache: true
 
-      - run: node --version
       - run: pnpm --version
 
       - run: pnpm install --frozen-lockfile
+      - run: pnpm exec node --version
 
       - run: pnpm run type-check
 
@@ -45,19 +39,13 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v6
         with:
-          version: 9
-          run_install: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache: true
 
-      - run: node --version
       - run: pnpm --version
 
       - run: pnpm install --frozen-lockfile
+      - run: pnpm exec node --version
 
       - run: pnpm run test

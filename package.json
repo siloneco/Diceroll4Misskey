@@ -22,5 +22,13 @@
     "ts-jest": "29.4.15",
     "ts-node": "10.9.2",
     "typescript": "5.9.3"
-  }
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "26.13.1",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.22.0"
 }
