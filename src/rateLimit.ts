@@ -1,11 +1,8 @@
-import { createRequire } from 'module'
+import { RateLimiter } from 'limiter'
 import { getLimitForHost, getLimitForUser } from './config.js'
-const require = createRequire(import.meta.url)
 
-const RateLimiter = require('limiter').RateLimiter
-
-const hostRateLimiter = new Map<string, typeof RateLimiter>()
-const userRateLimiter = new Map<string, typeof RateLimiter>()
+const hostRateLimiter = new Map<string, RateLimiter>()
+const userRateLimiter = new Map<string, RateLimiter>()
 
 type Props = {
   user: string

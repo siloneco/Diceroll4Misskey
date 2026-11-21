@@ -1,0 +1,5 @@
+minimumReleaseAge: 10080
+
+allowBuilds:
+  # Jest uses the prebuilt watcher distributed for the current platform.
+  '@parcel/watcher': false

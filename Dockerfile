@@ -8,7 +8,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 WORKDIR /work
 
 # Install packages
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN npm install --global "$(node -p 'require("./package.json").packageManager')"
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
