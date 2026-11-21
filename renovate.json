@@ -24,7 +24,7 @@
       "matchPackageNames": [
         "actions/checkout",
         "pnpm/action-setup",
-        "gcr.io/distroless/nodejs26-debian13",
+        "gcr.io/distroless/cc-debian13",
         "node"
       ],
       "pinDigests": false
